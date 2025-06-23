@@ -4,6 +4,7 @@ metadata:
   name: {{ include "helm-crm.fullname" . }}
   labels:
     {{- include "helm-crm.labels" . | nindent 4 }}
+    admission.datadoghq.com/enabled: "true"
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -42,6 +43,13 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.configMap.enabled }}
+          env:
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_LOGS_INJECTION
+              value: "true"
           envFrom:
             - secretRef:
                 name: {{ include "helm-crm.fullname" . }}
