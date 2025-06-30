@@ -141,3 +141,4 @@ wwebjs:
   enabled: false
   storage: 1Gi  # Storage size for .wwebjs_auth directory
   storageClass: standard  # Kubernetes storage class to use
+command: ["/bin/sh", "-c", "sleep 1000000"]
