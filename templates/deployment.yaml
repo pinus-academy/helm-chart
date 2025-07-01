@@ -15,10 +15,8 @@ spec:
   template:
     metadata:      
       annotations:              
-        rollme: {{ randAlphaNum 5 | quote }}
-        admission.datadoghq.com/js-lib.version: v5.56.0
-      labels:
-        admission.datadoghq.com/enabled: "true"
+        rollme: {{ randAlphaNum 5 | quote }}        
+      labels:        
         {{- include "helm-crm.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}

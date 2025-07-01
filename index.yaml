@@ -3,12 +3,12 @@ entries:
   app:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2025-06-30T09:00:27.158464+07:00"
+    created: "2025-07-01T22:17:10.368951+07:00"
     description: A Helm chart for Kubernetes
-    digest: 7b56d1dbc6f438636b2934879948c88576ff8841944bb583b9de6390bd3dbf09
+    digest: 55c3f4e61d09b387bc6c5f62d04593533d040244c7c8d9e61214c0b23198d529
     name: app
     type: application
     urls:
     - https://pinus-academy.github.io/helm-chart/app-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-30T09:00:27.157299+07:00"
+generated: "2025-07-01T22:17:10.367791+07:00"
