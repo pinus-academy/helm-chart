@@ -142,3 +142,6 @@ wwebjs:
   storage: 1Gi  # Storage size for .wwebjs_auth directory
   storageClass: standard  # Kubernetes storage class to use
 command: []
+
+deployaja:
+  enabled: false
