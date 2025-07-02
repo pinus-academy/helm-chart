@@ -25,6 +25,6 @@ spec:
                   number: {{ .Values.service.port | default 8070 }}
   tls:
   - hosts:
-    - {{ .Values.ingress.host | default "pinuspintar.id" }}
-    secretName: {{ .Values.ingress.host | default "pinuspintar.id" }}-tls
+    - {{ .Values.ingress.host | default "'*.deployaja.id'" }}
+    secretName: {{ .Values.ingress.host | default "deployaja-tls-secret" }}
 {{- end }}
