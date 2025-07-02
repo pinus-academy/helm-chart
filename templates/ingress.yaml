@@ -23,16 +23,15 @@ spec:
                 name: {{ include "helm-crm.fullname" . }}
                 port:
                   number: {{ .Values.service.port | default 8070 }}
-  {{if .Values.deployaja.enabled}}
+  {{- if .Values.deployaja.enabled }}
   tls:
   - hosts:
     - '*.deployaja.id'
     secretName: deployaja-tls-secret
-  {{end}}
-  {{else}}
+  {{- else }}
   tls:
   - hosts:
     - {{ .Values.ingress.host | default "pinuspintar.id" }}
     secretName: {{ .Values.ingress.host | default "pinuspintar.id" }}-tls
-  {{end}}
+  {{- end }}
 {{- end }}
