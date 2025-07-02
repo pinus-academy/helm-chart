@@ -3,8 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "helm-crm.fullname" . }}
   labels:
-    {{- include "helm-crm.labels" . | nindent 4 }}    
-    
+    {{- include "helm-crm.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
@@ -55,8 +54,6 @@ spec:
             - name: DD_LOGS_INJECTION
               value: "true"
           envFrom:
-            - secretRef:
-                name: {{ include "helm-crm.fullname" . }}
             - configMapRef:
                 name: {{ include "helm-crm.fullname" . }}
           {{- end }}
@@ -84,6 +81,10 @@ spec:
             - name: wwebjs-auth
               mountPath: /usr/src/app/.wwebjs_auth
             {{- end }}
+            - name: secret-volume
+              mountPath: /usr/src/app/.env
+              subPath: .env
+              readOnly: true
       volumes:
         {{- if .Values.volumes }}
         {{- toYaml .Values.volumes | nindent 8 }}
@@ -93,6 +94,9 @@ spec:
           persistentVolumeClaim:
             claimName: {{ include "helm-crm.fullname" . }}-wwebjs-auth
         {{- end }}
+        - name: secret-volume
+          secret:
+            secretName: {{ include "helm-crm.fullname" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
