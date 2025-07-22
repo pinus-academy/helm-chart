@@ -23,6 +23,8 @@ spec:
         {{- end }}
 
     spec:
+      nodeSelector:
+        for: app
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- range . }}
