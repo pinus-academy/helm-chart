@@ -22,12 +22,18 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
 
-    spec:
-      dnsPolicy: None
-      dnsConfig:
+    spec:      
+      dnsPolicy: ClusterFirstWithHostNet
+      dnsConfig:    
         nameservers:
+          - 10.43.0.10  # Kubernetes DNS (verify this is correct for your cluster)
           - 8.8.8.8
           - 1.1.1.1
+        searches:
+          - deployaja.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
+          - techarea.co.id
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- range . }}
